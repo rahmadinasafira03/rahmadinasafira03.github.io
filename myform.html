@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Validating Two Fields</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<style>
+    .label {float: left; width: 120px; 
+    }
+    .infobox {width: 200px; 
+    }
+    .error { color: red; padding-left: 10px; 
+    }
+    .submit { margin-left: 125px; margin-top: 10px;
+    } 
+    div{padding: 5px; 
+    } 
+</style>
+</head>
+<body>
+    <form>
+        <div>
+            <span class="label">Nama Lengkap</span> <!--Nama Box-->
+            <input type="text" class="infobox form-control" placeholder="Nama Lengkap" name="NamaLengkap"/> <!--Tipe dan kelas Box-->
+            <span class="error"> Maaf, kotak ini harus terisi.</span></div> <!--Peringatan jika kosong-->
+        <div>
+            <span class="label">NRP</span> <!--Nama Box-->
+            <input type="password" class="infobox form-control" placeholder="NRP" name="NRP"/> <!--Tipe dan kelas Box-->
+            <span class="error"> Maaf, kotak ini harus terisi.</span> <!--Peringatan jika kosong-->
+        </div>
+            <a href="#" data-toggle="tooltip" data-placement="right" title="Masuk!"> <!--Pop up box yang muncul ketika cursor diatas tombol masuk-->
+            <input class="submit btn btn-outline-primary" type="submit" value="Masuk"> <!--Tombol masuk-->
+            </a> 
+    </form> 
+
+    <script>
+        $(document).ready(function() {
+            $('[data-toggle="tooltip"]').tooltip(); //memunculkan pop up box ketika cursor diatas tombol masuk  
+            $('.error').hide(); // menyembunyikan peringatan eror jika box tidak diisi.
+            $('.submit').click(function(event){  //mengaktifkan fungsi didalamnya jika tombol submit di klik
+                $('.infobox').each(function(){  //menentukan fungsi yang akan dijalankan untuk setiap elemen yang cocok
+                    var data=$(this).val(); //mendeklarasikan variabel data yang berisi atribut nilai dari elemen yang dipilih
+                    var len=data.length; // mendeklarasikan variabel len yang berisi panjang data dari variabel data
+                    if(len<1) { // statement yang menjalankan kode didalamnya jika kondisi sama dengan true
+                        $(this).parent().find('.error').show(); //memunculkan kelas eror jika panjang data dalam box sama dengan 0 atau tidak diisi.
+                    } else { //statement yang menjalankan kode didalamnya jika kondisi sama dengan false
+                        $(this).parent().find('.error').hide(); //menyembunyikan kelas eror jika panjang data dalam box lebih dari 0 atau diisi.
+                    }
+                });
+            event.preventDefault(); //menghentikan terjadinya aksi default pada suatu elemen
+        });
+    }); 
+    </script>
+</body>
+</html>
